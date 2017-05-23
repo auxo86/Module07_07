@@ -41,8 +41,9 @@
         @RenderBody()
     </div>
 
-    <script src="~/Scripts/bootstrap.js"></script>
+    @*不能放反，bootstrap.js有用到jquery-1.10.2.js*@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
 
     @*required: false表示下面這一塊不是必要的*@
     @RenderSection("scripts", required: false)
