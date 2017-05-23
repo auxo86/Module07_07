@@ -1,0 +1,58 @@
+﻿@*產生強型別的基礎*@
+@model Mod02_01.Models.Opera
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    @*加入錯誤驗證強化顯示的樣式表*@
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            //蒐集錯誤訊息在最上面
+            <div>@Html.ValidationSummary()</div>
+            @Html.HiddenFor(m => m.OperaID)
+            <fieldset>
+                <legend>編輯歌劇</legend>
+                <div>@Html.LabelFor(m => m.Title)</div>
+                <div>
+                    @Html.EditorFor(m => m.Title)
+                    @*,"**"因為錯誤訊息收集在上面，所以這裡顯示替代的雙星符號*@
+                    @Html.ValidationMessageFor(m => m.Title, "**")
+                </div>
+                <div>@Html.LabelFor(m => m.Year)</div>
+                <div>
+                    @Html.EditorFor(m => m.Year)
+                    @Html.ValidationMessageFor(m => m.Year, "**")
+                </div>
+                <div>@Html.LabelFor(m => m.Composer)</div>
+                <div>
+                    @Html.EditorFor(m => m.Composer)
+                    @Html.ValidationMessageFor(m => m.Composer, "**")
+                </div>
+                <div>
+                    <input type="submit" value="儲存歌劇" />
+                </div>
+            </fieldset>
+        }
+        <p>
+            @Html.ActionLink("回歌劇列表", "Index")
+        </p>
+    </div>
+    @*原來的error messange在get Create表單時已經從 Server端load到瀏覽器上。
+        因為沒有Jquery，所以無法顯示出被load進來的錯誤訊息。
+        所以下方加入了jQuery*@
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>
